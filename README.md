@@ -4,7 +4,7 @@ LinkedList
 How to create a linked list in Objective-C.
 ----------
 
-LinkedList public methods:
+JBMLinkedList public methods/properties:
 - (instancetype)initWithArray:(NSArray *)array;
 - (instancetype)initWithHead:(JBMLinkedModel *)item;
 - (NSInteger)count;
