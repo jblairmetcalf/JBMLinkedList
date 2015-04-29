@@ -15,7 +15,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     
-    JBMLinkedList *linkedList = [[JBMLinkedList alloc] initWithArray:[[NSArray alloc] initWithObjects:@"zero", @"one", @"two", @"three", @"four", @"five", @"six", @"seven", @"eight", @"nine", nil]];
+    JBMLinkedList *linkedList = [[JBMLinkedList alloc] initWithArray:[[NSArray alloc] initWithObjects:@"zero", @(1), @"two", @(3), @"four", @[@(5)], @"six", @{@"value": @(7)}, @"eight", @(9), nil]];
     
     NSLog(@"linkedList: %@", linkedList);
     

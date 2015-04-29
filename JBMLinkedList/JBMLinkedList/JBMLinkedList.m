@@ -56,15 +56,15 @@
     [self recursiveRemoveObjectAtIndex:index currentItem:self.head currentIndex:0];
 }
 
-- (void)addObject:(NSString *)value atIndex:(NSInteger)index {
-    [self addObject:value atIndex:index withItem:self.head itemIndex:0];
+- (void)addObject:(id)object atIndex:(NSInteger)index {
+    [self addObject:object atIndex:index withItem:self.head itemIndex:0];
 }
 
 - (void)reverse {
     JBMLinkedList *new = [JBMLinkedList new];
     for (int i = 0; i < [self count]; i++) {
-        NSString *value = [self objectAtIndex:[self count] - i - 1];
-        [new addObject:value atIndex:i];
+        id object = [self objectAtIndex:[self count] - i - 1];
+        [new addObject:object atIndex:i];
     }
     self.head = new.head;
 }
@@ -83,13 +83,13 @@
 #pragma mark - Private Methods
 
 - (JBMLinkedItem *)addWithArray:(NSMutableArray *)array {
-    NSString *value = [array firstObject];
+    id object = [array firstObject];
     if ([array count] > 1) {
         [array removeObjectAtIndex:0];
         JBMLinkedItem *next = [self addWithArray:array];
-        return [[JBMLinkedItem alloc] initWithObject:value next:next];
+        return [[JBMLinkedItem alloc] initWithObject:object next:next];
     } else {
-        return [[JBMLinkedItem alloc] initWithObject:value];
+        return [[JBMLinkedItem alloc] initWithObject:object];
     }
 }
 
@@ -124,7 +124,7 @@
     }
 }
 
-- (void)addObject:(NSString *)object atIndex:(NSInteger)index withItem:(JBMLinkedItem *)item itemIndex:(NSInteger)itemIndex {
+- (void)addObject:(id)object atIndex:(NSInteger)index withItem:(JBMLinkedItem *)item itemIndex:(NSInteger)itemIndex {
     if (itemIndex < index) {
         [self addObject:object atIndex:index withItem:item.next itemIndex:itemIndex+1];
     } else {
@@ -142,11 +142,11 @@
     }
 }
 
-- (NSString *)objectAtIndex:(NSInteger)index {
+- (id)objectAtIndex:(NSInteger)index {
     return [self objectAtIndex:index withItem:self.head withIndex:0];
 }
 
-- (NSString *)objectAtIndex:(NSInteger)index withItem:(JBMLinkedItem *)item withIndex:(NSInteger)currentIndex {
+- (id)objectAtIndex:(NSInteger)index withItem:(JBMLinkedItem *)item withIndex:(NSInteger)currentIndex {
     if (index == currentIndex - 1) {
         return item.object;
     } else {

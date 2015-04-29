@@ -10,11 +10,11 @@
 
 @interface JBMLinkedItem : NSObject
 
-@property (nonatomic, strong) NSString *object;
+@property (nonatomic, strong) id object;
 @property (nonatomic, strong) JBMLinkedItem *next;
 
-- (instancetype)initWithObject:(NSString *)object;
+- (instancetype)initWithObject:(id)object;
 - (instancetype)initWithNext:(JBMLinkedItem *)next;
-- (instancetype)initWithObject:(NSString *)value next:(JBMLinkedItem *)next;
+- (instancetype)initWithObject:(id)object next:(JBMLinkedItem *)next;
 
 @end

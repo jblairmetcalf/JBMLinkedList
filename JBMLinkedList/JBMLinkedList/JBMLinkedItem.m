@@ -12,7 +12,7 @@
 
 #pragma mark - Public Methods
 
-- (instancetype)initWithObject:(NSString *)object {
+- (instancetype)initWithObject:(id)object {
     self = [super init];
     if (self) {
         self.object = object;
@@ -28,7 +28,7 @@
     return self;
 }
 
-- (instancetype)initWithObject:(NSString *)object next:(JBMLinkedItem *)next {
+- (instancetype)initWithObject:(id)object next:(JBMLinkedItem *)next {
     self = [self initWithObject:object];
     if (self) {
         self.next = next;

@@ -18,10 +18,10 @@
 - (instancetype)initWithArray:(NSArray *)array;
 - (instancetype)initWithHead:(JBMLinkedItem *)item;
 
-- (NSString *)objectAtIndex:(NSInteger)index;
+- (id)objectAtIndex:(NSInteger)index;
 
 - (void)removeObjectAtIndex:(NSInteger)index;
-- (void)addObject:(NSString *)value atIndex:(NSInteger)index;
+- (void)addObject:(id)object atIndex:(NSInteger)index;
 - (void)reverse;
 - (void)pop;
 - (void)shift;
