@@ -1,5 +1,5 @@
 //
-//  JBMLinkedModel.h
+//  JBMLinkedItem.h
 //  JBMLinkedList
 //
 //  Created by J Blair Metcalf on 4/20/15.
@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JBMLinkedModel : NSObject
+@interface JBMLinkedItem : NSObject
 
 @property (nonatomic, strong) NSString *object;
-@property (nonatomic, strong) JBMLinkedModel *next;
+@property (nonatomic, strong) JBMLinkedItem *next;
 
 - (instancetype)initWithObject:(NSString *)object;
-- (instancetype)initWithNext:(JBMLinkedModel *)next;
-- (instancetype)initWithObject:(NSString *)value next:(JBMLinkedModel *)next;
+- (instancetype)initWithNext:(JBMLinkedItem *)next;
+- (instancetype)initWithObject:(NSString *)value next:(JBMLinkedItem *)next;
 
 @end

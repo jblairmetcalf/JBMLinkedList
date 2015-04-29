@@ -8,10 +8,6 @@
 
 #import "JBMLinkedList.h"
 
-@interface JBMLinkedList ()
-
-@end
-
 @implementation JBMLinkedList
 
 #pragma mark - Override Methods
@@ -19,7 +15,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.head = [[JBMLinkedModel alloc] initWithObject:nil];
+        self.head = [[JBMLinkedItem alloc] initWithObject:nil];
     }
     return self;
 }
@@ -33,16 +29,16 @@
 - (instancetype)initWithArray:(NSArray *)array {
     self = [super init];
     if (self) {
-        self.head = [[JBMLinkedModel alloc] initWithNext:[self addWithArray:[NSMutableArray arrayWithArray:array]]];
+        self.head = [[JBMLinkedItem alloc] initWithNext:[self addWithArray:[NSMutableArray arrayWithArray:array]]];
     }
     return self;
 }
 
-- (JBMLinkedList *)initWithHead:(JBMLinkedModel *)head {
+- (JBMLinkedList *)initWithHead:(JBMLinkedItem *)head {
     self = [super init];
     if (self) {
         if (head.next) {
-            self.head = [[JBMLinkedModel alloc] initWithNext:[self addWithModel:head.next]];
+            self.head = [[JBMLinkedItem alloc] initWithNext:[self addWithItem:head.next]];
         }
     }
     return self;
@@ -52,16 +48,16 @@
     return [self countWithItem:self.head withIndex:0];
 }
 
-- (NSArray *)itemAsArray:(JBMLinkedModel *)model {
-    return [self asArray:[NSMutableArray new] withModel:model];
+- (NSArray *)itemAsArray:(JBMLinkedItem *)item {
+    return [self asArray:[NSMutableArray new] withItem:item];
 }
 
 - (void)removeObjectAtIndex:(NSInteger)index {
-    [self recursiveRemoveObjectAtIndex:index currentModel:self.head currentIndex:0];
+    [self recursiveRemoveObjectAtIndex:index currentItem:self.head currentIndex:0];
 }
 
 - (void)addObject:(NSString *)value atIndex:(NSInteger)index {
-    [self addObject:value atIndex:index withModel:self.head modelIndex:0];
+    [self addObject:value atIndex:index withItem:self.head itemIndex:0];
 }
 
 - (void)reverse {
@@ -86,59 +82,59 @@
 
 #pragma mark - Private Methods
 
-- (JBMLinkedModel *)addWithArray:(NSMutableArray *)array {
+- (JBMLinkedItem *)addWithArray:(NSMutableArray *)array {
     NSString *value = [array firstObject];
     if ([array count] > 1) {
         [array removeObjectAtIndex:0];
-        JBMLinkedModel *next = [self addWithArray:array];
-        return [[JBMLinkedModel alloc] initWithObject:value next:next];
+        JBMLinkedItem *next = [self addWithArray:array];
+        return [[JBMLinkedItem alloc] initWithObject:value next:next];
     } else {
-        return [[JBMLinkedModel alloc] initWithObject:value];
+        return [[JBMLinkedItem alloc] initWithObject:value];
     }
 }
 
-- (NSArray *)asArray:(NSMutableArray *)array withModel:(JBMLinkedModel *)model {
-    if (model.object) {
-        [array addObject:model.object];
+- (NSArray *)asArray:(NSMutableArray *)array withItem:(JBMLinkedItem *)item {
+    if (item.object) {
+        [array addObject:item.object];
     }
-    if (model.next) {
-        return [self asArray:array withModel:model.next];
+    if (item.next) {
+        return [self asArray:array withItem:item.next];
     } else {
         return [NSArray arrayWithArray:array];
     }
 }
 
-- (JBMLinkedModel *)addWithModel:(JBMLinkedModel *)model {
-    if (model.next) {
-        return [[JBMLinkedModel alloc] initWithObject:model.object next:[self addWithModel:model.next]];
+- (JBMLinkedItem *)addWithItem:(JBMLinkedItem *)item {
+    if (item.next) {
+        return [[JBMLinkedItem alloc] initWithObject:item.object next:[self addWithItem:item.next]];
     } else {
-        return [[JBMLinkedModel alloc] initWithObject:model.object];
+        return [[JBMLinkedItem alloc] initWithObject:item.object];
     }
 }
 
-- (void)recursiveRemoveObjectAtIndex:(NSInteger)removeIndex currentModel:(JBMLinkedModel *)currentModel currentIndex:(NSInteger)currentIndex {
+- (void)recursiveRemoveObjectAtIndex:(NSInteger)removeIndex currentItem:(JBMLinkedItem *)currentItem currentIndex:(NSInteger)currentIndex {
     if (currentIndex < removeIndex) {
-        [self recursiveRemoveObjectAtIndex:removeIndex currentModel:currentModel.next currentIndex:currentIndex+1];
+        [self recursiveRemoveObjectAtIndex:removeIndex currentItem:currentItem.next currentIndex:currentIndex+1];
     } else {
-        if (currentModel.next.next) {
-            currentModel.next = currentModel.next.next;
+        if (currentItem.next.next) {
+            currentItem.next = currentItem.next.next;
         } else {
-            currentModel.next = nil;
+            currentItem.next = nil;
         }
     }
 }
 
-- (void)addObject:(NSString *)object atIndex:(NSInteger)index withModel:(JBMLinkedModel *)model modelIndex:(NSInteger)modelIndex {
-    if (modelIndex < index) {
-        [self addObject:object atIndex:index withModel:model.next modelIndex:modelIndex+1];
+- (void)addObject:(NSString *)object atIndex:(NSInteger)index withItem:(JBMLinkedItem *)item itemIndex:(NSInteger)itemIndex {
+    if (itemIndex < index) {
+        [self addObject:object atIndex:index withItem:item.next itemIndex:itemIndex+1];
     } else {
-        JBMLinkedModel *new = [[JBMLinkedModel alloc] initWithObject:object next:model.next];
-        new.next = model.next;
-        model.next = new;
+        JBMLinkedItem *new = [[JBMLinkedItem alloc] initWithObject:object next:item.next];
+        new.next = item.next;
+        item.next = new;
     }
 }
 
-- (NSInteger)countWithItem:(JBMLinkedModel *)item withIndex:(NSInteger)index {
+- (NSInteger)countWithItem:(JBMLinkedItem *)item withIndex:(NSInteger)index {
     if (item.next) {
         return [self countWithItem:item.next withIndex:index+1];
     } else {
@@ -150,7 +146,7 @@
     return [self objectAtIndex:index withItem:self.head withIndex:0];
 }
 
-- (NSString *)objectAtIndex:(NSInteger)index withItem:(JBMLinkedModel *)item withIndex:(NSInteger)currentIndex {
+- (NSString *)objectAtIndex:(NSInteger)index withItem:(JBMLinkedItem *)item withIndex:(NSInteger)currentIndex {
     if (index == currentIndex - 1) {
         return item.object;
     } else {

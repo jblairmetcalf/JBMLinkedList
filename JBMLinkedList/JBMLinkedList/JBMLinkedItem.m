@@ -1,14 +1,14 @@
 //
-//  JBMLinkedModel.m
+//  JBMLinkedItem.m
 //  JBMLinkedList
 //
 //  Created by J Blair Metcalf on 4/20/15.
 //  Copyright (c) 2015 J Blair Metcalf. All rights reserved.
 //
 
-#import "JBMLinkedModel.h"
+#import "JBMLinkedItem.h"
 
-@implementation JBMLinkedModel
+@implementation JBMLinkedItem
 
 #pragma mark - Public Methods
 
@@ -20,7 +20,7 @@
     return self;
 }
 
-- (instancetype)initWithNext:(JBMLinkedModel *)next {
+- (instancetype)initWithNext:(JBMLinkedItem *)next {
     self = [super init];
     if (self) {
         self.next = next;
@@ -28,7 +28,7 @@
     return self;
 }
 
-- (instancetype)initWithObject:(NSString *)object next:(JBMLinkedModel *)next {
+- (instancetype)initWithObject:(NSString *)object next:(JBMLinkedItem *)next {
     self = [self initWithObject:object];
     if (self) {
         self.next = next;

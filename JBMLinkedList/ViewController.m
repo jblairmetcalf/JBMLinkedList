@@ -10,10 +10,6 @@
 
 #import "JBMLinkedList.h"
 
-@interface ViewController ()
-
-@end
-
 @implementation ViewController
 
 - (void)viewDidLoad {

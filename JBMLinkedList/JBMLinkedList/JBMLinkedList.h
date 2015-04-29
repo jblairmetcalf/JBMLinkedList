@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-#import "JBMLinkedModel.h"
+#import "JBMLinkedItem.h"
 
 @interface JBMLinkedList : NSObject
 
-@property (nonatomic, strong) JBMLinkedModel *head;
+@property (nonatomic, strong) JBMLinkedItem *head;
 @property (nonatomic) NSInteger count;
 
 - (instancetype)initWithArray:(NSArray *)array;
-- (instancetype)initWithHead:(JBMLinkedModel *)item;
+- (instancetype)initWithHead:(JBMLinkedItem *)item;
 
 - (NSString *)objectAtIndex:(NSInteger)index;
 
